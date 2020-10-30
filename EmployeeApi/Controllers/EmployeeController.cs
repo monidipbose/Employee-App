@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EmployeeApi.Interfaces;
 using EmployeeApi.Model;
@@ -77,6 +78,22 @@ namespace EmployeeApi.Controllers
                 return Ok(emp);
             }
             return NotFound("Not Found");
+        }
+
+        // GET api/<EmployeeController>/seletiveemployee
+        [HttpGet("seletiveemployee/{ids}")]
+        public async Task<ActionResult> GetEmployeeWithDeptSeletiveEmployee(int[] ids)
+        {
+            List<Employee> employees = new List<Employee>();
+            foreach (var id in ids)
+            {
+                var emp = await _repo.GetEmployeeWithDeptAsync(id);
+                if (emp != null)
+                {
+                    employees.Add(emp);
+                }
+            }
+            return Ok(employees);
         }
 
         // POST api/<EmployeeController>

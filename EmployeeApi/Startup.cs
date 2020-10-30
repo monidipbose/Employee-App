@@ -26,6 +26,8 @@ namespace EmployeeApi
             services.AddControllers();
             services.AddDbContext<EmployeeDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddCors(options => options.AddDefaultPolicy(
+                builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +43,8 @@ namespace EmployeeApi
             employeeDBContext.Database.EnsureCreated();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

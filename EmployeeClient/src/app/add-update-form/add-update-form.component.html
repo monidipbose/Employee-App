@@ -1,0 +1,85 @@
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h3 class="h4">Employee Details </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="from-group row">
+                            <div class="col-lg-6 col-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Name<span class="text-danger">*</span></label>
+                                    <input type="text" placeholder="Name" name="name" class="form-control"
+                                        [(ngModel)]="user.name" #name="ngModel"
+                                        [ngClass]="{ 'is-invalid': (f.submitted && name.invalid), 'is-valid': (name.valid) }"
+                                        required>
+                                    <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                                        <div *ngIf="name.errors.required">Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Company<span class="text-danger">*</span></label>
+                                    <input type="text" placeholder="Company" name="companyName" class="form-control"
+                                        [(ngModel)]="user.companyName" #companyName="ngModel"
+                                        [ngClass]="{ 'is-invalid': (f.submitted && companyName.invalid), 'is-valid': (companyName.valid) }"
+                                        required>
+                                    <div *ngIf="f.submitted && companyName.invalid" class="invalid-feedback">
+                                        <div *ngIf="companyName.errors.required">Company is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Department<span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" [(ngModel)]="user.departmentId" name="department" #department="ngModel"
+                                        [ngClass]="{ 'is-invalid': (f.submitted && user.departmentId===undefined), 'is-valid': (department.valid) }">
+                                        <option value=1 selected>IT</option>
+                                        <option value=2>Admin</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && user.departmentId===undefined" class="invalid-feedback">
+                                        <div>Please select Department</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Age<span class="text-danger">*</span></label>
+                                    <input type="number" placeholder="Age" class="form-control" name="age"
+                                        [(ngModel)]="user.age" #age="ngModel" required
+                                        [ngClass]="{ 'is-invalid': (f.submitted && age.invalid), 'is-valid': (age.valid) }">
+                                    <div *ngIf="f.submitted && age.invalid" class="invalid-feedback">
+                                        <div *ngIf="age.errors.required">Age is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Address<span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="2" name="address" [(ngModel)]="user.address"
+                                #address="ngModel"
+                                [ngClass]="{ 'is-invalid': (f.submitted && address.invalid), 'is-valid': (address.valid) }"
+                                required>
+                                </textarea>
+                            <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+                                <div *ngIf="address.errors.required">Address is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-success"
+                                    style="width: 100px; align-items: center;">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

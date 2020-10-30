@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <section class="col-3">
+            <ngx-treeview [items]="items" [config]="config" (selectedChange)="onSelectedChange($event)"
+                (filterChange)="onFilterChange($event)">
+            </ngx-treeview>
+        </section>
+        <section class="col-9">
+            <div>
+                <table class="table table-hover" style="cursor: pointer;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>AGE</th>
+                            <th>ADDRESS</th>
+                            <th>COMPANY</th>
+                            <th>DEPARTMENT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: white;"
+                            *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+                            <th><i class="fa fa-trash ml-2" style="color: tomato;" aria-hidden="true"
+                                    (click)='onDelete(user.id, user.name)'></i></th>
+                            <th>{{user.id}}</th>
+                            <th routerLink="/detail/{{user.id}}">{{user.name}}</th>
+                            <th>{{user.age}}</th>
+                            <td>{{user.address}}</td>
+                            <td>{{user.companyName}}</td>
+                            <td>{{user.department.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="has-text-centered" style="color: teal;">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </section>
+    </div>
+</div>
